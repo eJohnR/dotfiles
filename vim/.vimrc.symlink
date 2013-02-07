@@ -1,0 +1,227 @@
+" ---------------------------------------------------------
+"  John Rowley
+"  John.A.Rowley@Googlemail.com
+"  vimrc
+"  Modified: 2012 Dec 30
+" ---------------------------------------------------------
+
+" Disable compatibly with Vi
+set nocompatible
+set modelines=0
+
+" ---------------------------------------------------------
+" Pathogen
+" ---------------------------------------------------------
+
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+" ---------------------------------------------------------
+" Leader Key
+" ---------------------------------------------------------
+
+let mapleader = ","
+
+" Count Words/Characters
+map <leader>c g<C-G>
+" Edit Vimrc Quickly
+map <leader>vi ;e $MYVIMRC<CR>
+" Delete Trailing Whitespace
+map <leader>rw ;%s/\s\+$//<CR>;w<CR>
+" Retab and Reformat the File with Spaces
+map <leader>T ;set expandtab<cr>:retab!<cr>
+" Toggle CTRL-P
+map <leader><leader> ;CtrlP<CR>
+" Toggle Tagbar
+map <leader>t ;TagbarToggle<CR>
+" Auto-Generate Ctags
+nnoremap <leader><CR> :lcd %:p:h<CR> :silent! !ctags -R<CR>
+
+" Edit another file in the same dir as the current file
+" uses expression to extract path from current file's path
+" Thanks Ben Orenstein(@r00k)
+map <leader>e ;e <C-R>=expand("%h:p:h") . '/'<CR>
+map <leader>s ;split <C-R>=expand("%:p:h") . '/'<CR>
+map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
+
+" ---------------------------------------------------------
+" Editing
+" ---------------------------------------------------------
+
+" Set File Encoding/Format
+set encoding=utf-8
+scriptencoding utf-8
+set fileformats=unix,dos,mac
+set formatoptions=tcrql
+
+" Enable Syntax Highlighting
+syntax on
+filetype plugin indent on
+
+" Colour Scheme & Font
+set background=light
+let g:solarized_termtrans=1
+let g:solarized_contrast="high"
+let g:solarized_visibility="low"
+set guifont=DejaVu\ Sans\ Mono:h12
+colorscheme solarized
+
+" Splitting Buffers
+set splitbelow
+set splitright
+
+" Fix Backspace/Clipboard
+set backspace=start,indent,eol
+if $TMUX == ''
+  set clipboard=unnamed
+endif
+
+" Invisibles
+set list
+set listchars=tab:>\ ,eol:^
+
+" Location Indicators
+set nocursorcolumn
+set cursorline
+
+" Line Number/Wrapping
+set textwidth=78
+set colorcolumn=80
+set numberwidth=5
+set number
+set ruler
+set wrap
+
+" Brackets
+set showmatch
+set matchtime=2
+
+" Tabs
+set shiftround
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+set smartindent
+set autoindent
+set expandtab
+set smarttab
+
+set ai
+set si
+
+" Search
+set ignorecase
+set incsearch
+set smartcase
+set hlsearch
+
+" ---------------------------------------------------------
+" Key Mappings
+" ---------------------------------------------------------
+
+" Disable Arrow Keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+
+" Swap ; with :
+noremap ; :
+noremap : ;
+
+" Easy Movement
+nmap k gk
+nmap j gj
+
+" ---------------------------------------------------------
+" UI
+" ---------------------------------------------------------
+
+" Hide Toolbar While Running
+if has("gui_running")
+    set guioptions=egmt
+endif
+
+" Scroll Window
+set scrolloff=5
+
+" Blink
+set visualbell
+
+" No redraw while executing macros
+set lazyredraw
+
+" Fast redraw
+set ttyfast
+
+" Show incomplete commands
+set showcmd
+
+" ---------------------------------------------------------
+" Status Line
+" ---------------------------------------------------------
+
+" Show Status Line
+set laststatus=2
+
+set statusline=
+set statusline+=%1*\ [%n]               " Buffer Number
+set statusline+=%1*\ %<%F               " File Path
+set statusline+=%1*\ %y                 " File Type
+set statusline+=%2*\%m                  " Modified Flag
+set statusline+=%1*\ %=%-14.(%5l,%c%V%) " Line/Column Number
+set statusline+=%1*\ %-4P               " Percent
+
+" Status Line & Column Colour Settings
+hi User1 ctermfg=15 ctermbg=8 guifg=#FDF6E3  guibg=#002B36
+hi User2 ctermfg=1 ctermbg=8 guifg=#DC322F  guibg=#002B36
+hi ColorColumn ctermbg=1 guibg=#DC322F
+
+" ---------------------------------------------------------
+" Language Specific
+" ---------------------------------------------------------
+
+" .txt & .md
+au BufNewFile,BufRead *.txt setlocal spell spelllang=en_gb
+au BufNewFile,BufRead *.md, *.mkd, *.markdown setlocal spell spelllang=en_gb
+
+" tmux
+au BufNewFile,BufRead *tmux.conf set syntax=tmux
+
+" ---------------------------------------------------------
+" File Management
+" ---------------------------------------------------------
+
+" Save on Losing Focus
+au FocusLost * :wa
+
+" Code Folding
+set foldenable
+nnoremap <Space> za
+
+" Undo File Changes
+if version >= 703
+  set undodir=~/.vim/undodir
+  set undofile
+  set undoreload=10000
+endif
+set undolevels=1000
+
+" Keep 50 Commands in History
+set history=50
+
+" Filename Auto Completion
+set wildignore=*.o,*~,*.pyc
+set wildmode=longest:full
+set wildmenu
+
+" Buffer Management
+set autoread
+set autowrite
+set hidden
+
+" Disable Backup
+set noswapfile
+set nobackup
+set nowb

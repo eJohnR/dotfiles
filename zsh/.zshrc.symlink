@@ -1,0 +1,21 @@
+export EDITOR="vim"
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
+export LSCOLORS="exfxcxdxbxegedabagacad"
+export CLICOLOR=true
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt SHARE_HISTORY # share history between sessions
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt COMPLETE_IN_WORD
+
+setopt APPEND_HISTORY # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY # adds history & share across sessions
+setopt HIST_IGNORE_ALL_DUPS # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
