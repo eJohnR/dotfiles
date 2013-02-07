@@ -1,3 +1,7 @@
+autoload -U compinit promptinit
+compinit
+promptinit
+
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
@@ -7,15 +11,24 @@ export CLICOLOR=true
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=$HISTSIZE
 
+setopt VI
 setopt NO_HUP
 setopt NO_LIST_BEEP
-setopt SHARE_HISTORY # share history between sessions
-setopt EXTENDED_HISTORY # add timestamps to history
 setopt COMPLETE_IN_WORD
 
-setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY # adds history & share across sessions
-setopt HIST_IGNORE_ALL_DUPS # don't record dupes in history
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
+
+# Ignore case when autocompleting
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+autoload colors && colors
+
+export PROMPT="%{$fg[red]%}%n%{$reset_color%} at %{$fg[cyan]%}%m%{$reset_color%} in %{$fg[green]%}%1~%{$reset_color%}
+> "
