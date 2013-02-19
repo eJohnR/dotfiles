@@ -23,10 +23,10 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
+Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
 Bundle 'ervandew/supertab'
-Bundle 'plasticboy/vim-markdown'
 
 " ---------------------------------------------------------
 " Leader Key
