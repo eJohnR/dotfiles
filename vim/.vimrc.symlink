@@ -24,7 +24,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
 Bundle 'ervandew/supertab'
 
@@ -42,10 +41,10 @@ map <leader>vi ;e $MYVIMRC<CR>
 map <leader>rw ;%s/\s\+$//<CR>;w<CR>
 " Retab and Reformat the File with Spaces
 map <leader>T ;set expandtab<cr>:retab!<cr>
-" Toggle CTRL-P
-map <leader><leader> ;CtrlP<CR>
 " Toggle Tagbar
 map <leader>t ;TagbarToggle<CR>
+" Toggle NERDTree
+map <leader>n ;NERDTreeToggle<CR>
 " Auto-Generate Ctags
 nnoremap <leader><CR> :lcd %:p:h<CR> :silent! !ctags -R<CR>
 
