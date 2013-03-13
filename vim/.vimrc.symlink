@@ -26,6 +26,8 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'ervandew/supertab'
+Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
 
 " ---------------------------------------------------------
 " Leader Key
@@ -40,18 +42,30 @@ map <leader>vi ;e $MYVIMRC<CR>
 " Delete Trailing Whitespace
 map <leader>rw ;%s/\s\+$//<CR>;w<CR>
 " Retab and Reformat the File with Spaces
-map <leader>T ;set expandtab<cr>:retab!<cr>
+map <leader>T ;set expandtab<cr>;retab!<cr>
+
 " Toggle Tagbar
 map <leader>t ;TagbarToggle<CR>
 " Toggle NERDTree
 map <leader>n ;NERDTreeToggle<CR>
+" Fuzzy Search for Buffers
+map <leader>b ;CtrlPBuffer<CR>
+
+" Tabular
+if exists(":Tabularize")
+  nmap <leader>a= ;Tabularize /=<CR>
+  vmap <leader>a= ;Tabularize /=<CR>
+  nmap <leader>a; ;Tabularize /;\zs<CR>
+  vmap <leader>a; ;Tabularize /;\zs<CR>
+endif
+
 " Auto-Generate Ctags
 nnoremap <leader><CR> :lcd %:p:h<CR> :silent! !ctags -R<CR>
 
 " Edit another file in the same dir as the current file
 " uses expression to extract path from current file's path
 " Thanks Ben Orenstein(@r00k)
-map <leader>e ;e <C-R>=expand("%h:p:h") . '/'<CR>
+map <leader>e ;e <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>s ;split <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
@@ -61,7 +75,6 @@ map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
 " Set File Encoding/Format
 set encoding=utf-8
-scriptencoding utf-8
 set fileformats=unix,dos,mac
 set formatoptions=tcrql
 
@@ -74,7 +87,7 @@ set background=light
 let g:solarized_termtrans=1
 let g:solarized_contrast="high"
 let g:solarized_visibility="low"
-set guifont=DejaVu\ Sans\ Mono:h12
+set guifont=Source\ Code\ Pro:h12
 colorscheme solarized
 
 " Splitting Buffers
@@ -89,7 +102,7 @@ endif
 
 " Invisibles
 set list
-set listchars=tab:>\ ,eol:^
+set listchars=tab:>\ ,eol:¬
 
 " Location Indicators
 set nocursorcolumn
@@ -97,7 +110,7 @@ set cursorline
 
 " Line Number/Wrapping
 set textwidth=78
-set colorcolumn=80
+set colorcolumn=79
 set numberwidth=5
 set number
 set ruler
@@ -155,7 +168,7 @@ if has("gui_running")
 endif
 
 " Scroll Window
-set scrolloff=5
+set scrolloff=10
 
 " Blink
 set visualbell
@@ -197,12 +210,28 @@ hi ColorColumn ctermbg=1 guibg=#DC322F
 au BufNewFile,BufRead *.txt setlocal spell spelllang=en_gb
 au BufNewFile,BufRead *.md, *.mkd, *.markdown setlocal spell spelllang=en_gb
 
+" .py
+au BufNewFile,BufRead *.py setlocal ai si et st ts=4 sw=4 sts=4
+
+" .vimrc
+au BufWritePost .vimrc source %
+
 " tmux
-au BufNewFile,BufRead *tmux.conf set syntax=tmux
+au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
 
 " ---------------------------------------------------------
 " File Management
 " ---------------------------------------------------------
+
+" Ctrl P
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_match_window_bottom=0
+let g:ctrlp_max_height=5
+
+" Reduce Startup for Ctrl P
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip    " Mac/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe " Windows
 
 " Save on Losing Focus
 au FocusLost * :wa
@@ -224,7 +253,7 @@ set history=50
 
 " Filename Auto Completion
 set wildignore=*.o,*~,*.pyc
-set wildmode=longest:full
+set wildmode=list:longest,list:full
 set wildmenu
 
 " Buffer Management
