@@ -42,7 +42,7 @@ map <leader>vi ;e $MYVIMRC<CR>
 " Delete Trailing Whitespace
 map <leader>rw ;%s/\s\+$//<CR>;w<CR>
 " Retab and Reformat the File with Spaces
-map <leader>T ;set expandtab<cr>;retab!<cr>
+map <leader>T ;set expandtab<CR>;retab!<CR>
 
 " Toggle Tagbar
 map <leader>t ;TagbarToggle<CR>
@@ -61,6 +61,10 @@ endif
 
 " Auto-Generate Ctags
 nnoremap <leader><CR> :lcd %:p:h<CR> :silent! !ctags -R<CR>
+
+" Add Blank Lines w/o Leaving Normal Mode
+map <leader>o o<ESC>
+map <leader>O O<ESC>
 
 " Edit another file in the same dir as the current file
 " uses expression to extract path from current file's path
@@ -83,7 +87,7 @@ syntax on
 filetype plugin indent on
 
 " Colour Scheme & Font
-set background=light
+set background=dark
 let g:solarized_termtrans=1
 let g:solarized_contrast="high"
 let g:solarized_visibility="low"
@@ -110,7 +114,7 @@ set cursorline
 
 " Line Number/Wrapping
 set textwidth=78
-set colorcolumn=79
+set colorcolumn=80
 set numberwidth=5
 set number
 set ruler
@@ -122,12 +126,13 @@ set matchtime=2
 
 " Tabs
 set shiftround
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=3
+set softtabstop=3
+set tabstop=3
 
 set smartindent
 set autoindent
+set copyindent
 set expandtab
 set smarttab
 
@@ -198,8 +203,8 @@ set statusline+=%1*\ %=%-14.(%5l,%c%V%) " Line/Column Number
 set statusline+=%1*\ %-4P               " Percent
 
 " Status Line & Column Colour Settings
-hi User1 ctermfg=15 ctermbg=8 guifg=#FDF6E3  guibg=#002B36
-hi User2 ctermfg=1 ctermbg=8 guifg=#DC322F  guibg=#002B36
+hi User1 ctermfg=15 ctermbg=1 guifg=#FDF6E3  guibg=#DC322F
+hi User2 ctermfg=15 ctermbg=1 guifg=#FDF6E3  guibg=#DC322F
 hi ColorColumn ctermbg=1 guibg=#DC322F
 
 " ---------------------------------------------------------
@@ -230,8 +235,10 @@ let g:ctrlp_match_window_bottom=0
 let g:ctrlp_max_height=5
 
 " Reduce Startup for Ctrl P
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip    " Mac/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe " Windows
+let g:ctrlp_custom_ignore = {
+      \ 'dir': '\tmp$\|\.git$',
+      \ 'file': '\.png$\|\.jpg$\|\.jpeg$\|\.gif$\|\.psd$\|\.avi$\|\.mp4$'
+      \ }
 
 " Save on Losing Focus
 au FocusLost * :wa
@@ -252,8 +259,8 @@ set undolevels=1000
 set history=50
 
 " Filename Auto Completion
-set wildignore=*.o,*~,*.pyc
-set wildmode=list:longest,list:full
+set wildignore+=*.o,*~,*.pyc
+set wildmode=list:longest,full
 set wildmenu
 
 " Buffer Management
