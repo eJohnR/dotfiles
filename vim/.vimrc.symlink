@@ -17,12 +17,20 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " ---------------------------------------------------------
+" Powerline
+" ---------------------------------------------------------
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+let g:Powerline_symbols = 'fancy'
+
+" ---------------------------------------------------------
 " Manage Bundles
 " ---------------------------------------------------------
 
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
+Bundle 'lokaltog/powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'ervandew/supertab'
@@ -91,7 +99,7 @@ set background=dark
 let g:solarized_termtrans=1
 let g:solarized_contrast="high"
 let g:solarized_visibility="low"
-set guifont=Source\ Code\ Pro:h12
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 colorscheme solarized
 
 " Splitting Buffers
@@ -194,17 +202,17 @@ set showcmd
 " Show Status Line
 set laststatus=2
 
-set statusline=
-set statusline+=%1*\ [%n]               " Buffer Number
-set statusline+=%1*\ %<%F               " File Path
-set statusline+=%1*\ %y                 " File Type
-set statusline+=%2*\%m                  " Modified Flag
-set statusline+=%1*\ %=%-14.(%5l,%c%V%) " Line/Column Number
-set statusline+=%1*\ %-4P               " Percent
+" Use when not using Powerline
+" set statusline=
+" set statusline+=%1*\ [%n]               " Buffer Number
+" set statusline+=%1*\ %<%F               " File Path
+" set statusline+=%2*\%m                  " Modified Flag
+" set statusline+=%1*\ %=%-6y            " Line/Column Number
+" set statusline+=%1*\ %-4P               " Percent
 
 " Status Line & Column Colour Settings
-hi User1 ctermfg=15 ctermbg=1 guifg=#FDF6E3  guibg=#DC322F
-hi User2 ctermfg=15 ctermbg=1 guifg=#FDF6E3  guibg=#DC322F
+" hi User1 ctermfg=15 ctermbg=1 guifg=#FDF6E3  guibg=#DC322F
+" hi User2 ctermfg=15 ctermbg=1 guifg=#FDF6E3  guibg=#DC322F
 hi ColorColumn ctermbg=1 guibg=#DC322F
 
 " ---------------------------------------------------------
@@ -219,7 +227,7 @@ au BufNewFile,BufRead *.md, *.mkd, *.markdown setlocal spell spelllang=en_gb
 au BufNewFile,BufRead *.py setlocal ai si et st ts=4 sw=4 sts=4
 
 " .vimrc
-au BufWritePost .vimrc source %
+" au BufWritePost .vimrc source %
 
 " tmux
 au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
