@@ -208,13 +208,13 @@ set statusline+=%5*\ %P\                    " Percent
 set statusline+=%6*\ %l\ \|\ %c\            " Line | Column Number
 
 " Status Line & Column Colour Settings
-hi User1 ctermfg=15  ctermbg=1
-hi User2 ctermfg=15  ctermbg=240
-hi User3 ctermfg=15  ctermbg=236
-hi User4 ctermfg=246 ctermbg=236
-hi User5 ctermfg=15  ctermbg=240
-hi User6 ctermfg=0   ctermbg=15
-hi ColorColumn       ctermbg=1
+hi User1 ctermfg=15  ctermbg=1   guifg=#FFFFFF guibg=#EF001F
+hi User2 ctermfg=15  ctermbg=240 guifg=#FFFFFF guibg=#6A6A6A
+hi User3 ctermfg=15  ctermbg=236 guifg=#FFFFFF guibg=#414141
+hi User4 ctermfg=246 ctermbg=236 guifg=#949494 guibg=#414141
+hi User5 ctermfg=15  ctermbg=240 guifg=#FFFFFF guibg=#6A6A6A
+hi User6 ctermfg=0   ctermbg=15  guifg=#000000 guibg=#FFFFFF
+hi ColorColumn       ctermbg=1                 guibg=#EF001F
 
 " ---------------------------------------------------------
 " Language Specific
