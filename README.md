@@ -9,5 +9,6 @@ Symlinking the .vimrc.symlink file to your home directory.
 ```
 ln -s $PWD/.vimrc.symlink $HOME/.vimrc
 ```  
-TODO: Include script to do all the hardwork (symlinking).
 ![vim/tmux](http://i.imgur.com/1wvPhwT.png)
+
+TODO: Include script to do all the hardwork (symlinking).
