@@ -6,6 +6,6 @@ your home directory from the .dotfiles folder.
 
 Example:
 
-   ln -n $PWD/.vimrc.symlink $HOME/.vimrc
+```ln -s $PWD/.vimrc.symlink $HOME/.vimrc
 
 ![vim/tmux](http://i.imgur.com/1wvPhwT.png)
