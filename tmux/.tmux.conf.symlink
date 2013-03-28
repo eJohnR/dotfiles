@@ -2,16 +2,19 @@
 #  John Rowley
 #  John.A.Rowley@Googlemail.com
 #  tmux.conf
-#  Modified: 2012 Dec 30
+#  Modified: 2013 Mar 27
 # ---------------------------------------------------------
 
 # Enable UTF-8
 setw -g utf8 on
 set -g status-utf8 on
 
-# Start Count at 1
+# Start Window Count at 1
 set -g base-index 1
 set -g pane-base-index 1
+
+# Allow for faster key repetition
+set -s escape-time 0
 
 # Enable Alt Screen/Disable Auto Rename
 set -g alternate-screen on
@@ -22,43 +25,22 @@ setw -g mode-keys vi
 set -g default-terminal "screen-256color"
 
 # ---------------------------------------------------------
-# Powerline Settings
+# Status Line Settings
 # ---------------------------------------------------------
 
 # Messages
-set -g message-bg colour39
-set -g message-fg colour234
-
-## Powerline Settings
-set -g status-left-length 52
-set -g status-right-length 451
+set -g message-fg white
+set -g message-bg red
 
 set -g status-fg white
 set -g status-bg colour234
 
-set -g status-left '#[fg=colour235,bg=colour252,bold] ❐ #S #[fg=colour252,bg=colour238,nobold]#[fg=colour245,bg=colour238,bold] #h #[fg=colour238,bg=colour234,nobold]'
+set -g status-left-length 52
+set -g status-right-length 451
+
+set -g status-left '#[fg=black,bg=white] ❐ #S #[fg=colour245,bg=colour238] #h '
 set -g window-status-format "#[fg=white,bg=colour234] #I #W "
-set -g window-status-current-format "#[fg=colour234,bg=colour39] #W #[fg=colour39,bg=colour234,nobold]"
+set -g window-status-current-format "#[fg=white,bg=red] #W "
 
 # Date/Time Status Line
 set -g status-right '#[fg=white]%m/%d %H:%M '
-
-# ---------------------------------------------------------
-# Status Line Settings
-# ---------------------------------------------------------
-
-### Use when not using Powerline
-## Active Status Line
-#set -g status-bg colour234
-#
-## alignment settings
-#set-option -g status-justify centre
-#
-## status left options
-#set-option -g status-left '#[bg=white,fg=black] ❐ #S '
-#
-#set-window-option -g window-status-format '#[fg=white] #W '
-#set-window-option -g window-status-current-format '#[bg=cyan,fg=white] #W '
-#
-## Date/Time Status Line
-#set -g status-right '#[fg=white]%m/%d %H:%M '
