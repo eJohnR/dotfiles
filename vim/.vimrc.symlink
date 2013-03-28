@@ -220,10 +220,6 @@ hi ColorColumn       ctermbg=1
 " Language Specific
 " ---------------------------------------------------------
 
-" .txt & .md
-au BufNewFile,BufRead *.txt setlocal spell spelllang=en_gb
-au BufNewFile,BufRead *.md, *.mkd, *.markdown setlocal spell spelllang=en_gb
-
 " .py
 au BufNewFile,BufRead *.py setlocal ai si et st ts=4 sw=4 sts=4
 
