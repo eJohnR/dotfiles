@@ -23,10 +23,13 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'majutsushi/tagbar'
-Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdtree'
+Bundle 'Shougo/neocomplcache'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 
 " ---------------------------------------------------------
@@ -50,14 +53,8 @@ map <leader>t ;TagbarToggle<CR>
 map <leader>n ;NERDTreeToggle<CR>
 " Fuzzy Search for Buffers
 map <leader>b ;CtrlPBuffer<CR>
-
-" Tabular
-if exists(":Tabularize")
-  nmap <leader>a= ;Tabularize /=<CR>
-  vmap <leader>a= ;Tabularize /=<CR>
-  nmap <leader>a; ;Tabularize /;\zs<CR>
-  vmap <leader>a; ;Tabularize /;\zs<CR>
-endif
+" Align by = with Tabular
+map <leader>a= ;Tab /=<CR>
 
 " Auto-Generate Ctags
 nnoremap <leader><CR> :lcd %:p:h<CR> :silent! !ctags -R<CR>
@@ -244,6 +241,12 @@ let g:ctrlp_custom_ignore = {
       \ 'dir': '\tmp$\|\.git$',
       \ 'file': '\.png$\|\.jpg$\|\.jpeg$\|\.gif$\|\.psd$\|\.avi$\|\.mp4$'
       \ }
+
+" Neo-Complete Cache
+let g:neocomplcache_enable_at_startup=1
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Save on Losing Focus
 au FocusLost * :wa
