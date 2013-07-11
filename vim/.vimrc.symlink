@@ -24,9 +24,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'godlygeek/tabular'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Shougo/neocomplcache'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
@@ -69,6 +67,9 @@ map <leader>O O<ESC>
 map <leader>e ;e <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>s ;split <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
+
+" Reload my .vimrc
+map <leader>S ;source $MYVIMRC<CR>
 
 " ---------------------------------------------------------
 " Editing
@@ -205,7 +206,7 @@ set statusline+=%5*\ %P\                    " Percent
 set statusline+=%6*\ %l\ \|\ %c\            " Line | Column Number
 
 " Status Line & Column Colour Settings
-hi User1 ctermfg=15  ctermbg=1   guifg=#FFFFFF guibg=#EF001F
+hi User1 ctermfg=15  ctermbg=2   guifg=#FFFFFF guibg=#709E00
 hi User2 ctermfg=15  ctermbg=240 guifg=#FFFFFF guibg=#6A6A6A
 hi User3 ctermfg=15  ctermbg=236 guifg=#FFFFFF guibg=#414141
 hi User4 ctermfg=246 ctermbg=236 guifg=#949494 guibg=#414141
