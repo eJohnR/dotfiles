@@ -8,6 +8,6 @@ alias gco="git checkout"
 alias gsu="git status -uno"
 
 # todo.sh Aliases
-alias t="todo.sh"
-alias ta="todo.sh add"
-alias tc="todo.sh do"
+alias td="todo.sh | sort"
+alias tda="todo.sh add"
+alias tdc="todo.sh do"

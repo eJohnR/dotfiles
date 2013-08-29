@@ -24,11 +24,14 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'godlygeek/tabular'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
-Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'wincent/Command-T'
 
 " ---------------------------------------------------------
 " Leader Key
@@ -44,13 +47,15 @@ map <leader>vi ;e $MYVIMRC<CR>
 map <leader>rw ;%s/\s\+$//<CR>;w<CR>
 " Retab and Reformat the File with Spaces
 map <leader>T ;set expandtab<CR>;retab!<CR>
-
 " Toggle Tagbar
 map <leader>t ;TagbarToggle<CR>
 " Toggle NERDTree
-map <leader>n ;NERDTreeToggle<CR>
+map <leader>d ;NERDTreeToggle<CR>
+map <leader>f ;NERDTreeFind<CR>
+" Fuzzy File Search
+map <leader>t ;CommandT<CR>
 " Fuzzy Search for Buffers
-map <leader>b ;CtrlPBuffer<CR>
+map <leader>b ;CommandTBuffer<CR>
 " Align by = with Tabular
 map <leader>a= ;Tab /=<CR>
 
@@ -221,9 +226,6 @@ hi ColorColumn       ctermbg=1                 guibg=#EF001F
 " .py
 au BufNewFile,BufRead *.py setlocal ai si et st ts=4 sw=4 sts=4
 
-" .vimrc
-" au BufWritePost .vimrc source %
-
 " tmux
 au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
 
@@ -231,24 +233,9 @@ au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
 " File Management
 " ---------------------------------------------------------
 
-" Ctrl P
-let g:ctrlp_map='<c-p>'
-let g:ctrlp_cmd='CtrlP'
-let g:ctrlp_match_window_bottom=0
-let g:ctrlp_max_height=5
-
-" Reduce Startup for Ctrl P
-let g:ctrlp_custom_ignore = {
-      \ 'dir': '\tmp$\|\.git$',
-      \ 'file': '\.png$\|\.jpg$\|\.jpeg$\|\.gif$\|\.psd$\|\.avi$\|\.mp4$'
-      \ }
-
-" YouCompleteMe
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Command-T
+let g:CommandTMinHeight=10
+let g:CommandTMaxHeight=10
 
 " Save on Losing Focus
 au FocusLost * :wa
@@ -269,7 +256,10 @@ set undolevels=1000
 set history=50
 
 " Filename Auto Completion
-set wildignore+=*.o,*~,*.pyc
+set wildignore+=*.o,*~,*.swp,*.obj,*.zip
+set wildignore+=*.png,*.jpg,*.gif,*.psd,*.
+set wildignore+=*.class,*.pyc,*.pyo,.git
+set wildignore+=log/**,tmp/**
 set wildmode=list:longest,full
 set wildmenu
 
