@@ -25,6 +25,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'godlygeek/tabular'
 Bundle 'majutsushi/tagbar'
+Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
