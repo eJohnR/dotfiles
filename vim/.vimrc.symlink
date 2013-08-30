@@ -54,7 +54,7 @@ map <leader>t ;TagbarToggle<CR>
 map <leader>d ;NERDTreeToggle<CR>
 map <leader>f ;NERDTreeFind<CR>
 " Fuzzy File Search
-map <leader>t ;CtrlP<CR>
+map <leader>p ;CtrlP<CR>
 " Fuzzy Search for Buffers
 map <leader>b ;CtrlPBuffer<CR>
 " Align by = with Tabular

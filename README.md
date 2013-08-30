@@ -10,6 +10,6 @@ Symlinking the .vimrc.symlink file to your home directory.
 ```
 ln -s $PWD/.vimrc.symlink $HOME/.vimrc
 ```  
-![vim/tmux](http://i.imgur.com/1wvPhwT.png)
+![vim/tmux](screen.png)
 
 TODO: Include script to do all the hardwork (symlinking).
