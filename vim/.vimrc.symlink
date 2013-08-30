@@ -247,7 +247,6 @@ fu! CtrlP_Statusline_1(...)
    let item        = '%6* '.a:5.' '
    let nxt         = '%4* '.a:6.' '
    let dir         = '%=%4* '.getcwd().' '
-
    retu mode.description.prv.item.nxt.dir
 endf
 
@@ -255,7 +254,6 @@ fu! CtrlP_Statusline_2(...)
    let mode = '%1* CtrlP '
    let len  = '%4* '.a:1.' '
    let dir  = '%=%4* '.getcwd().' '
-
    retu mode.len.dir
 endf
 
