@@ -2,7 +2,7 @@
 "  John Rowley
 "  John.A.Rowley@Googlemail.com
 "  vimrc
-"  Modified: 2013 Mar 28
+"  Modified: 2013 Aug 30
 " ---------------------------------------------------------
 
 " Disable compatibly with Vi
@@ -24,6 +24,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdtree'
@@ -32,7 +33,6 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'wincent/Command-T'
 
 " ---------------------------------------------------------
 " Leader Key
@@ -54,9 +54,9 @@ map <leader>t ;TagbarToggle<CR>
 map <leader>d ;NERDTreeToggle<CR>
 map <leader>f ;NERDTreeFind<CR>
 " Fuzzy File Search
-map <leader>t ;CommandT<CR>
+map <leader>t ;CtrlP<CR>
 " Fuzzy Search for Buffers
-map <leader>b ;CommandTBuffer<CR>
+map <leader>b ;CtrlPBuffer<CR>
 " Align by = with Tabular
 map <leader>a= ;Tab /=<CR>
 
@@ -221,6 +221,45 @@ hi User6 ctermfg=0   ctermbg=15  guifg=#000000 guibg=#FFFFFF
 hi ColorColumn       ctermbg=1                 guibg=#EF001F
 
 " ---------------------------------------------------------
+" Ctrl-P
+" ---------------------------------------------------------
+
+let g:ctrlp_dotfiles=0
+let g:ctrlp_switch_buffer=0
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_max_depth=15
+
+" Custom Statusline
+let g:ctrlp_status_func = {
+\ 'main': 'CtrlP_Statusline_1',
+\ 'prog': 'CtrlP_Statusline_2'
+\ }
+ 
+fu! CtrlP_Statusline_1(...)
+   let mode        = '%1* CtrlP '
+   let description = '%2* Go To: '
+   let prv         = '%4* '.a:4.' '
+   let item        = '%6* '.a:5.' '
+   let nxt         = '%4* '.a:6.' '
+   let dir         = '%=%4* '.getcwd().' '
+
+   retu mode.description.prv.item.nxt.dir
+endf
+
+fu! CtrlP_Statusline_2(...)
+   let mode = '%1* CtrlP '
+   let len  = '%4* '.a:1.' '
+   let dir  = '%=%4* '.getcwd().' '
+
+   retu mode.len.dir
+endf
+
+" ---------------------------------------------------------
 " Language Specific
 " ---------------------------------------------------------
 
@@ -233,10 +272,6 @@ au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
 " ---------------------------------------------------------
 " File Management
 " ---------------------------------------------------------
-
-" Command-T
-let g:CommandTMinHeight=10
-let g:CommandTMaxHeight=10
 
 " Save on Losing Focus
 au FocusLost * :wa
@@ -257,9 +292,6 @@ set undolevels=1000
 set history=50
 
 " Filename Auto Completion
-set wildignore+=*.o,*~,*.swp,*.obj,*.zip
-set wildignore+=*.png,*.jpg,*.gif,*.psd,*.
-set wildignore+=*.class,*.pyc,*.pyo,.git
 set wildignore+=log/**,tmp/**
 set wildmode=list:longest,full
 set wildmenu
