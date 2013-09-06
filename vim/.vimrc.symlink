@@ -24,10 +24,10 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'godlygeek/tabular'
+Bundle 'jiangmiao/auto-pairs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdtree'
-Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
@@ -270,6 +270,9 @@ au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
 " ---------------------------------------------------------
 " File Management
 " ---------------------------------------------------------
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " Save on Losing Focus
 au FocusLost * :wa
