@@ -5,9 +5,19 @@
 "  Modified: 2013 Aug 30
 " ---------------------------------------------------------
 
+" Clear autocmds
+autocmd!
+
 " Disable compatibly with Vi
 set nocompatible
-set modelines=0
+
+" Load vimrc from current directory and disable unsafe commands in them
+set exrc
+set secure
+
+" Respect modelines in file up to this number of lines
+set modeline
+set modelines=4
 
 " ---------------------------------------------------------
 " Vundle
@@ -48,15 +58,18 @@ map <leader>vi ;e $MYVIMRC<CR>
 map <leader>rw ;%s/\s\+$//<CR>;w<CR>
 " Retab and Reformat the File with Spaces
 map <leader>T ;set expandtab<CR>;retab!<CR>
+
 " Toggle Tagbar
 map <leader>t ;TagbarToggle<CR>
 " Toggle NERDTree
 map <leader>d ;NERDTreeToggle<CR>
 map <leader>f ;NERDTreeFind<CR>
+
 " Fuzzy File Search
 map <leader>p ;CtrlP<CR>
 " Fuzzy Search for Buffers
 map <leader>b ;CtrlPBuffer<CR>
+
 " Align by = with Tabular
 map <leader>a= ;Tab /=<CR>
 
@@ -70,7 +83,7 @@ map <leader>O O<ESC>
 " Edit another file in the same dir as the current file
 " uses expression to extract path from current file's path
 " Thanks Ben Orenstein(@r00k)
-map <leader>e ;e <C-R>=expand("%:p:h") . '/'<CR>
+map <leader>e ;tabe <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>s ;split <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
@@ -110,7 +123,7 @@ endif
 
 " Invisibles
 set list
-set listchars=tab:>\ ,eol:¬
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_,extends:❯,precedes:❮
 
 " Location Indicators
 set nocursorcolumn
@@ -120,8 +133,12 @@ set cursorline
 set textwidth=78
 set colorcolumn=80
 set numberwidth=5
+set relativenumber
 set number
 set ruler
+
+" Enable wrapping
+set showbreak=↪\
 set wrap
 
 " Brackets
@@ -159,6 +176,11 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
+" Navigate Tabs Easily
+map <C-l> ;tabn<CR>
+map <C-h> ;tabp<CR>
+map <C-n> ;tabnew<CR>
+
 " Swap ; with :
 noremap ; :
 noremap : ;
@@ -188,6 +210,17 @@ set lazyredraw
 " Fast redraw
 set ttyfast
 
+" Time out on key codes but not mappings
+set notimeout
+set ttimeout
+set ttimeoutlen=100
+
+" Update syntax highlighting for more lines increased scrolling performance
+syntax sync minlines=256
+
+" Don't syntax highlight long lines
+set synmaxcol=256
+
 " Show incomplete commands
 set showcmd
 
@@ -209,7 +242,7 @@ set statusline+=%4*\ %=%{&ff}\ \|           " File Format
 set statusline+=%4*\ %{&fenc}\ \|           " File Encoding
 set statusline+=%4*\ %{&ft}\ \              " Filetype
 set statusline+=%5*\ %P\                    " Percent
-set statusline+=%6*\ %l\ \|\ %c\            " Line | Column Number
+set statusline+=%6*\ %l\ \|\ %L\            " Line | Total Number
 
 " Status Line & Column Colour Settings
 hi User1 ctermfg=15  ctermbg=2   guifg=#FFFFFF guibg=#709E00
@@ -262,7 +295,7 @@ endf
 " ---------------------------------------------------------
 
 " .py
-au BufNewFile,BufRead *.py setlocal ai si et st ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.py setlocal ai si et ts=4 sw=4 sts=4
 
 " tmux
 au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
@@ -292,8 +325,17 @@ set undolevels=1000
 " Keep 50 Commands in History
 set history=50
 
-" Filename Auto Completion
-set wildignore+=log/**,tmp/**
+" Wildmode
+
+" Disable temp and backup files
+set wildignore+=*.swp,*~,._*
+
+" Disable output and VCS files
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+
+" Disable archive files
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+
 set wildmode=list:longest,full
 set wildmenu
 

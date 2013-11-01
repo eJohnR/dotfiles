@@ -40,7 +40,7 @@ set -g status-right-length 451
 
 set -g status-left '#[fg=black,bg=white] ❐ #S #[fg=colour245,bg=colour238] #h '
 set -g window-status-format "#[fg=white,bg=colour234] #I #W "
-set -g window-status-current-format "#[fg=white,bg=red] #W "
+set -g window-status-current-format "#[fg=white,bg=green] #W "
 
 # Date/Time Status Line
 set -g status-right '#[fg=white]%m/%d %H:%M '
