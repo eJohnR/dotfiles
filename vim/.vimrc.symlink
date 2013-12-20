@@ -2,7 +2,7 @@
 "  John Rowley
 "  John.A.Rowley@Googlemail.com
 "  vimrc
-"  Modified: 2013 Aug 30
+"  Modified: 2013 Dec 20
 " ---------------------------------------------------------
 
 " Clear autocmds
@@ -23,6 +23,18 @@ set modelines=4
 " Vundle
 " ---------------------------------------------------------
 
+" If Vundle isn't installed, install it
+let vundleInstalled=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+   echo "Installing Vundle.."
+   echo ""
+   silent !mkdir -p ~/.vim/bundle
+   silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+   let vundleInstalled=0
+endif
+
+" Required for Vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -33,16 +45,24 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
+Bundle 'aaronbieber/quicktask'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'Valloric/YouCompleteMe'
+
+if vundleInstalled == 0
+   echo "Installed Bundles.."
+   echo ""
+   :BundleInstall
+endif
 
 " ---------------------------------------------------------
 " Leader Key
@@ -65,8 +85,6 @@ map <leader>t ;TagbarToggle<CR>
 map <leader>d ;NERDTreeToggle<CR>
 map <leader>f ;NERDTreeFind<CR>
 
-" Fuzzy File Search
-map <leader>p ;CtrlP<CR>
 " Fuzzy Search for Buffers
 map <leader>b ;CtrlPBuffer<CR>
 
@@ -98,6 +116,7 @@ map <leader>S ;source $MYVIMRC<CR>
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set formatoptions=tcrql
+set formatprg=par
 
 " Enable Syntax Highlighting
 syntax on
@@ -130,7 +149,7 @@ set nocursorcolumn
 set cursorline
 
 " Line Number/Wrapping
-set textwidth=78
+set textwidth=72
 set colorcolumn=80
 set numberwidth=5
 set relativenumber
@@ -252,19 +271,19 @@ hi User4 ctermfg=246 ctermbg=236 guifg=#949494 guibg=#414141
 hi User5 ctermfg=15  ctermbg=240 guifg=#FFFFFF guibg=#6A6A6A
 hi User6 ctermfg=0   ctermbg=15  guifg=#000000 guibg=#FFFFFF
 hi ColorColumn       ctermbg=1                 guibg=#EF001F
+hi SignColumn        ctermbg=0                 guibg=#002B36
+hi LineNr            ctermbg=8                 guibg=#002B36
 
 " ---------------------------------------------------------
+" Plugins
+" ---------------------------------------------------------
+
 " Ctrl-P
-" ---------------------------------------------------------
-
 let g:ctrlp_dotfiles=0
 let g:ctrlp_switch_buffer=0
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll)$',
-    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-    \ }
 let g:ctrlp_working_path_mode=0
+let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_reuse_window='ac'
 let g:ctrlp_max_depth=15
 
 " Custom Statusline
@@ -290,6 +309,12 @@ fu! CtrlP_Statusline_2(...)
    retu mode.len.dir
 endf
 
+" Syntastic
+hi SyntasticErrorSign guifg=#DC322F guibg=#002B36
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+
 " ---------------------------------------------------------
 " Language Specific
 " ---------------------------------------------------------
@@ -297,15 +322,18 @@ endf
 " .py
 au BufNewFile,BufRead *.py setlocal ai si et ts=4 sw=4 sts=4
 
+" .tex
+au BufNewFile,BufRead *.tex set spell
+
 " tmux
 au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
+
+" todo
+au BufNewFile,BufRead TODO.txt set spell ft=quicktask
 
 " ---------------------------------------------------------
 " File Management
 " ---------------------------------------------------------
-
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " Save on Losing Focus
 au FocusLost * :wa
@@ -332,6 +360,9 @@ set wildignore+=*.swp,*~,._*
 
 " Disable output and VCS files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+
+" Disable images
+set wildignore+=*.png,*.jpg,*.otf,*.woff,*.jpeg,*.orig,*.psd,*.gif
 
 " Disable archive files
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
