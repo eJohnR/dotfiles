@@ -45,7 +45,6 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'aaronbieber/quicktask'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'jiangmiao/auto-pairs'
