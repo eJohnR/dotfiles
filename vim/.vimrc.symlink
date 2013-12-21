@@ -24,14 +24,14 @@ set modelines=4
 " ---------------------------------------------------------
 
 " If Vundle isn't installed, install it
-let vundleInstalled=1
+let vundleInstalled=0
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
    echo "Installing Vundle.."
    echo ""
    silent !mkdir -p ~/.vim/bundle
    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-   let vundleInstalled=0
+   let vundleInstalled=1
 endif
 
 " Required for Vundle
@@ -57,7 +57,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'Valloric/YouCompleteMe'
 
-if vundleInstalled == 0
+if vundleInstalled == 1
    echo "Installed Bundles.."
    echo ""
    :BundleInstall
@@ -76,7 +76,7 @@ map <leader>vi ;e $MYVIMRC<CR>
 " Delete Trailing Whitespace
 map <leader>rw ;%s/\s\+$//<CR>;w<CR>
 " Retab and Reformat the File with Spaces
-map <leader>T ;set expandtab<CR>;retab!<CR>
+map <leader>R ;set expandtab<CR>;retab!<CR>
 
 " Toggle Tagbar
 map <leader>t ;TagbarToggle<CR>
@@ -283,7 +283,7 @@ let g:ctrlp_switch_buffer=0
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_working_path_mode='ra'
 let g:ctrlp_reuse_window='ac'
-let g:ctrlp_max_depth=15
+let g:ctrlp_max_depth=10
 
 " Custom Statusline
 let g:ctrlp_status_func = {
