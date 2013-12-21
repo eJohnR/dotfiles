@@ -19,7 +19,7 @@ function todo_count() {
       then
          echo "$todos"
       else
-         echo ""
+         echo 0
       fi
    else
       echo ""
@@ -31,7 +31,7 @@ function todo_prompt() {
    if [ $COUNT != 0 ]; then
       echo "$1: $COUNT";
    else
-      echo ""
+      echo "";
    fi
 }
 
