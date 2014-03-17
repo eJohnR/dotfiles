@@ -45,18 +45,17 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-vinegar'
 Bundle 'Valloric/YouCompleteMe'
 
+" Install Bundles
 if vundleInstalled == 1
    echo "Installed Bundles.."
    echo ""
@@ -87,7 +86,7 @@ map <leader>f ;NERDTreeFind<CR>
 " Fuzzy Search for Buffers
 map <leader>b ;CtrlPBuffer<CR>
 
-" Align by = with Tabular
+" Align with Tabular
 map <leader>a= ;Tab /=<CR>
 
 " Auto-Generate Ctags
@@ -263,7 +262,7 @@ set statusline+=%5*\ %P\                    " Percent
 set statusline+=%6*\ %l\ \|\ %L\            " Line | Total Number
 
 " Status Line & Column Colour Settings
-hi User1 ctermfg=15  ctermbg=2   guifg=#FFFFFF guibg=#709E00
+hi User1 ctermfg=15  ctermbg=2   guifg=#FFFFFF guibg=#859900
 hi User2 ctermfg=15  ctermbg=240 guifg=#FFFFFF guibg=#6A6A6A
 hi User3 ctermfg=15  ctermbg=236 guifg=#FFFFFF guibg=#414141
 hi User4 ctermfg=246 ctermbg=236 guifg=#949494 guibg=#414141
@@ -290,22 +289,22 @@ let g:ctrlp_status_func = {
 \ 'main': 'CtrlP_Statusline_1',
 \ 'prog': 'CtrlP_Statusline_2'
 \ }
- 
+
 fu! CtrlP_Statusline_1(...)
-   let mode        = '%1* CtrlP '
-   let description = '%2* Go To: '
-   let prv         = '%4* '.a:4.' '
+   let prv         = '%2* '.a:4.' '
    let item        = '%6* '.a:5.' '
-   let nxt         = '%4* '.a:6.' '
-   let dir         = '%=%4* '.getcwd().' '
-   retu mode.description.prv.item.nxt.dir
+   let nxt         = '%2* '.a:6.' '
+   let str         = '%4* '
+   let end         = '%=%4* '
+   let dir         = '%2* '.getcwd().' '
+   retu prv.item.nxt.str.end.dir
 endf
 
 fu! CtrlP_Statusline_2(...)
-   let mode = '%1* CtrlP '
    let len  = '%4* '.a:1.' '
-   let dir  = '%=%4* '.getcwd().' '
-   retu mode.len.dir
+   let spc  = '%=%4* '
+   let dir  = '%2* '.getcwd().' '
+   retu len.spc.dir
 endf
 
 " Syntastic
@@ -326,9 +325,6 @@ au BufNewFile,BufRead *.tex set spell
 
 " tmux
 au BufNewFile,BufRead *tmux.conf setlocal syntax=tmux
-
-" todo
-au BufNewFile,BufRead TODO.txt set spell ft=quicktask
 
 " ---------------------------------------------------------
 " File Management
@@ -362,6 +358,9 @@ set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
 
 " Disable images
 set wildignore+=*.png,*.jpg,*.otf,*.woff,*.jpeg,*.orig,*.psd,*.gif
+
+" Disable media
+set wildignore+=*.avi,*.mpg,*.mp4,*.wmv,*.mp3,*.wav,*.aiff,*.flac
 
 " Disable archive files
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
