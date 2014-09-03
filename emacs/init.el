@@ -1,6 +1,6 @@
 ;;; .Emacs
 ; John A. Rowley
-; Thu Mar 16 21:58:06 GMT 2014
+; Tue Sep  2 22:15:39 BST 2014
 
 ;; User Details
 (setq user-full-name    "John A. Rowley"
@@ -22,8 +22,8 @@
 (show-paren-mode 1)
 ; Tabs - 4 Wide
 (setq-default tab-width 4
-			  c-basic-offset tab-width
-			  tab-stop-list (list 4 8 12 16 20 24 28 32 36 40 44 48 52 56 60)
+			  c-basic-offset 4
+			  c-default-style "linux"
 			  indent-tabs-mode t)
 
 ;; Environment
@@ -53,6 +53,10 @@
 (set-default-font "Inconsolata-13")
 
 ;; Misc
+; Evaluate Buffer / Reload init.el
+(add-hook 'emacs-lisp-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-x E") 'eval-buffer)))
 ; Reduce Delay
 (setq echo-keystrokes 0.1
 	  use-dialog-box nil)
@@ -62,12 +66,30 @@
 (display-time)
 
 ;; Packages
-; Auto-Complete
-(require 'auto-complete-config)
-(ac-config-default)
+; Company-Mode
+(add-hook 'after-init-hook 'global-company-mode)
+; Helm
+(require 'helm)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+
+(setq 
+ helm-google-suggest-use-curl-p t
+ helm-scroll-amount 4
+ helm-quick-update t
+ helm-idle-delay 0.01
+ helm-input-idle-delay 0.01
+
+ helm-boring-file-regexp-list
+ '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$")
+
+ helm-split-window-default-side 'other
+ helm-split-window-in-side-p t
+)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(helm-mode 1)
 ; Smart-Parens
 (require 'smartparens-config)
-(require 'smartparens-ruby)
 (smartparens-global-mode)
 (show-smartparens-global-mode t)
 ; YASnippet
@@ -76,6 +98,7 @@
 
 ;; Theming
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'molokai t)
+(load-theme 'base16-default t)
 ; Set Line Number Background
-(set-face-attribute 'linum nil :background "#1B1D1E")
+(set-face-attribute 'linum nil :background "#202020")
+(set-face-background 'mode-line "#202020")
