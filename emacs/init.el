@@ -88,10 +88,9 @@
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 (helm-mode 1)
-; Smart-Parens
-(require 'smartparens-config)
-(smartparens-global-mode)
-(show-smartparens-global-mode t)
+; Rainbow Delimiter
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
 ; YASnippet
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -99,6 +98,8 @@
 ;; Theming
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'base16-default t)
-; Set Line Number Background
+; Set Line Number Foreground/Background
 (set-face-attribute 'linum nil :background "#202020")
+(set-face-attribute 'linum nil :foreground "#444444")
+; Set Mode Line Background
 (set-face-background 'mode-line "#202020")
