@@ -19,6 +19,7 @@
 (setq auto-save-default nil
 	  make-backup-files nil)
 ; Auto Pair Parens/Braces
+(electric-pair-mode 1)
 (show-paren-mode 1)
 ; Tabs - 4 Wide
 (setq-default tab-width 4
@@ -68,26 +69,6 @@
 ;; Packages
 ; Company-Mode
 (add-hook 'after-init-hook 'global-company-mode)
-; Helm
-(require 'helm)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-
-(setq 
- helm-google-suggest-use-curl-p t
- helm-scroll-amount 4
- helm-quick-update t
- helm-idle-delay 0.01
- helm-input-idle-delay 0.01
-
- helm-boring-file-regexp-list
- '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$")
-
- helm-split-window-default-side 'other
- helm-split-window-in-side-p t
-)
-
-(global-set-key (kbd "M-x") 'helm-M-x)
-(helm-mode 1)
 ; Rainbow Delimiter
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
