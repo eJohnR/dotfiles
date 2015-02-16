@@ -2,7 +2,7 @@
 "  John Rowley
 "  John.A.Rowley@Googlemail.com
 "  vimrc
-"  Modified: 2014 Feb 20
+"  Modified: Mon Feb 16 19:48:12 GMT 2015
 " ---------------------------------------------------------
 
 " Clear autocmds
@@ -45,10 +45,10 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
+Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'godlygeek/tabular'
 Bundle 'Raimondi/delimitMate'
 Bundle 'Shougo/neocomplete'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
 Bundle 'tpope/vim-vinegar'
 Bundle 'w0ng/vim-hybrid'
 
@@ -86,6 +86,9 @@ map <leader>e ;e **/*
 map <leader>s ;split <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
+" Insert Date at Cursor
+map <leader>d ;r !date<CR> I<BS><ESC>
+
 " Reload my .vimrc
 map <leader>S ;source $MYVIMRC<CR>
 
@@ -105,7 +108,7 @@ filetype plugin indent on
 
 " Colour Scheme & Font
 set background=dark
-set guifont=Termsyn \12
+set guifont=Source\ Code\ Pro:h12
 colorscheme hybrid
 
 " Splitting Buffers
@@ -282,7 +285,7 @@ endif
 " ---------------------------------------------------------
 
 " .py
-au BufNewFile,BufRead *.py setlocal ai si et ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.py setlocal ai si et ts=2 sw=2 sts=2
 
 " .tex
 au BufNewFile,BufRead *.tex set spell
