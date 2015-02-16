@@ -86,6 +86,14 @@ map <leader>e ;e **/*
 map <leader>s ;split <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>v ;vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
+" Common Alignment Shortcuts
+if exists(":Tabularize")
+	nmap <leader>a= ;Tabularize /=<CR>
+	vmap <leader>a= ;Tabularize /=<CR>
+	nmap <leader>a; ;Tabularize /:<CR>
+	vmap <leader>a; ;Tabularize /:<CR>
+endif
+
 " Insert Date at Cursor
 map <leader>d ;r !date<CR> I<BS><ESC>
 
